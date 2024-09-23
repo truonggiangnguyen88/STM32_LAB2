@@ -96,19 +96,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer(0,2);
-  setTimer(1,3);
+  setTimer(0,120);
+  setTimer(1,110);
   int status = 1;
   while (1)
   {
 
 	  if(timer_flag[0] == 1){
-		  setTimer(1,100);
+		  setTimer(0,100);
 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if(timer_flag[1] == 1){
-		  setTimer(2, 50);
+		  setTimer(1, 50);
 		  switch(status){
 		  case 1:
 			  display7SEG(1);
@@ -135,12 +135,13 @@ int main(void)
 			  status = 4;
 			  break;
 		  case 4:
-			  display7SEG(4);
+			  display7SEG(0);
 			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, GPIO_PIN_SET);
 			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, GPIO_PIN_SET);
 			  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, GPIO_PIN_SET);
 			  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, GPIO_PIN_RESET);
-			  status = 0;
+			  status = 1;
+			  break;
 		  default:
 			  break;
 		  }
