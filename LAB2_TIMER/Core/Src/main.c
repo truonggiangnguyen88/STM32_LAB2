@@ -96,14 +96,18 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  setTimer1(1);
+  setTimer(1,2);
+  setTimer(2,3);
   int status = 1;
   while (1)
   {
 
-	  if(timer1_flag == 1){
-		  setTimer1(100);
+	  if(timer_flag[1] == 1){
+		  setTimer(1,100);
 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  }
+	  if(timer_flag[2] == 1){
+		  setTimer(2, 50);
 		  switch(status){
 		  case 1:
 			  display7SEG(1);
