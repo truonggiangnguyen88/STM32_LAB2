@@ -22,6 +22,7 @@
 #include "software_timer.h"
 #include "display7SEG.h"
 #include "update7SEG.h"
+#include "updateClockBuffer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -99,6 +100,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer(0,2);
   setTimer(1,3);
+  setTimer(2,5);
+  int hour = 15, minute = 8, second = 50;
   while (1)
   {
 
@@ -108,11 +111,30 @@ int main(void)
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if(timer_flag[1] == 1){
-		  setTimer(1, 100);
+		  setTimer(1, 25);
 		  update7SEG(index_led++);
-		  if(index_led >= MAX_LED){
-			  index_led = 0;
-		  }
+			if(index_led >= MAX_LED){
+				index_led = 0;
+			}
+	  }
+
+	  if(timer_flag[2] == 1){
+		  setTimer(2, 100);
+
+		  second++;
+		         if (second >= 60) {
+		             second = 0;
+		             minute++;
+		         }
+		         if(minute >= 60) {
+		             minute = 0;
+		             hour++;
+		         }
+		         if(hour >= 24) {
+		             hour = 0;
+		         }
+		  updateClockBuffer(hour, minute);
+
 	  }
 
     /* USER CODE END WHILE */
