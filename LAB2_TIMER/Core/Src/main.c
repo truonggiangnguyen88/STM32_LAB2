@@ -105,10 +105,10 @@ int main(void)
 	  if(timer_flag[0] == 1){
 		  setTimer(0,100);
 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-		  //HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if(timer_flag[1] == 1){
-		  setTimer(1, 50);
+		  setTimer(1, 100);
 		  update7SEG(index_led++);
 		  if(index_led >= MAX_LED){
 			  index_led = 0;
