@@ -8,7 +8,7 @@
 #ifndef INC_SOFTWARE_TIMER_H_
 #define INC_SOFTWARE_TIMER_H_
 
-extern int timer_flag[3];
+extern int timer_flag[5];
 
 void setTimer(int index, int counter);
 void timerRun();
