@@ -11,7 +11,7 @@
 
 const int MAX_LED_MATRIX = 8;
  int index_led_matrix = 0;
- uint8_t matrix_buffer[8] = {0x18, 0x3C, 0x66, 0xC3, 0xFF, 0xFF, 0xC3, 0xC3};
+ uint8_t matrix_buffer[8] = {0x18, 0x3C, 0x66, 0x66, 0x7E, 0x7E, 0x66, 0x66};
 
  void clearColumn() {
      HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM1_Pin | ENM2_Pin | ENM3_Pin | ENM4_Pin | ENM5_Pin | ENM6_Pin | ENM7_Pin, GPIO_PIN_RESET);
@@ -75,3 +75,12 @@ const int MAX_LED_MATRIX = 8;
 	 		 break;
 	 }
  }
+
+ void shiftLeft(uint8_t *buffer) {
+     for (int i = 0; i < 8; i++) {
+    	 uint8_t leftBit = (buffer[i] & 0x80) >> 7;
+         buffer[i] <<= 1;
+         buffer[i] |= leftBit;
+     }
+ }
+

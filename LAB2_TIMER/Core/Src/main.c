@@ -103,13 +103,14 @@ int main(void)
   setTimer(1,3);
   setTimer(2,5);
   setTimer(3,7);
+  setTimer(4,11);
   int hour = 15, minute = 8, second = 50;
   while (1)
   {
 
-	  if(timer_flag[2] == 1){
-		  setTimer(2,100);
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  if(timer_flag[0] == 1){
+		  setTimer(0,100);
+
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if(timer_flag[1] == 1){
@@ -144,6 +145,11 @@ int main(void)
 		  if(index_led_matrix >= MAX_LED_MATRIX){
 			  index_led_matrix = 0;
 		  }
+	  }
+	  if(timer_flag[4] == 1){
+		  setTimer(4,100);
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  shiftLeft(matrix_buffer);
 	  }
 
     /* USER CODE END WHILE */
